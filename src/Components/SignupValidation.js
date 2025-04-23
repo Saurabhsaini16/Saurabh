@@ -1,7 +1,7 @@
-export function SingupValidation(values){
+export function SignupValidation(values){
     let error={}
-    const email_pattern= /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    const password_pattern= /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+    const email_pattern= /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+    const password_pattern= /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
     if(values.name===""){
         error.name="Name should not be empty"
     }else{
@@ -9,14 +9,14 @@ export function SingupValidation(values){
     }
     if(values.email===""){
         error.email="Email should not be empty"
-    }else if(email_pattern.test(values.email)){
+    }else if(!email_pattern.test(values.email)){
         error.email="Email Did't Match"
     }else{
         error.email=""
     }
     if(values.password===""){
         error.password="Password should not be empty"
-    }else if(password_pattern.test(values.password)){
+    }else if(!password_pattern.test(values.password)){
         error.password="Password Did't Match"
     }else{
         error.password=""
@@ -24,4 +24,4 @@ export function SingupValidation(values){
     return error;
     }
 
-export default SingupValidation;
+export default SignupValidation;

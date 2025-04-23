@@ -1,8 +1,7 @@
 export function LoginValidation(values){
-
 let error={}
-const email_pattern= /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-const password_pattern= /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+const email_pattern= /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+const password_pattern= /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
 if(values.email===""){
     error.email="Name should not be empty"
 }else if(!email_pattern.test(values.email)){

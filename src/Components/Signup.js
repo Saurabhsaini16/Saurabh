@@ -1,10 +1,10 @@
 import React, {useState}from "react";
 import { Link, useNavigate } from 'react-router-dom';
-import {SingupValidation} from './SingupValidation';
 import axios from "axios";
+import SignupValidation from "./SignupValidation";
 
 export default function Signup() {
-    const [islogin,setIslogin]= useState(false);
+   const [islogin,setIslogin]= useState(false);
     const [values,setValue]=useState({
         name:'',
         email:'',
@@ -13,13 +13,15 @@ export default function Signup() {
     const navigate = useNavigate();
     const [errors,setErrors]=useState({})
     const handleInput=(event)=>{
-      setValue(prev => ({...prev,[event.target.name]:[event.target.values]}))
+      setValue(prev => ({...prev,[event.target.name]:[event.target.value]}))
     }
     const handleSubmit =(event)=>{
       event.preventDefault();
-      setErrors(SingupValidation(values));
+      setErrors(SignupValidation(values));
       if(errors.name==="" && errors.email==="" && errors.password===""){
-        axios.post('http://localhost:8081/singup', values)
+        const API_BASE = `http://${window.location.hostname}:8081`;
+              axios.post(`${API_BASE}/signup`, values)
+       // axios.post('http://localhost:8081/signup', values)
         .then(res =>{navigate('/');})
         .catch(err => console.log(err));
       }
@@ -39,7 +41,7 @@ export default function Signup() {
           <div><input type="password" placeholder="Password" name="password" onChange={handleInput}></input>
           {errors.password && <span className="text-danger"> {errors.password} </span>}</div>
           <div className="form-toggle">
-         <button><Link to="/" className={islogin ? 'active' : ""} onClick={()=> setIslogin(true)}>Login</Link></button>
+          <button><Link to="/" className={islogin ? 'active' : ""} onClick={()=> setIslogin(true)}>Login</Link></button>
           <button type="submit" className={!islogin ? 'active' : ""} onClick={()=> setIslogin(false)}>Signup</button>
           </div>
         </form>

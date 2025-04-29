@@ -13,6 +13,7 @@ const io = new Server(server, {
   cors: {
     origin: "*",
   },
+  maxHttpBufferSize: 1e8,
 });
 
 // MySQL setup

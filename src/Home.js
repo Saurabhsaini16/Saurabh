@@ -30,9 +30,6 @@ export default function Home() {
 
     socket = io(socketServerURL);
 
-
-   // socket = io("http://192.168.1.3:8081");
-
     socket.emit("user-online", userEmail);
 
     socket.on("update-user-list", (users) => {

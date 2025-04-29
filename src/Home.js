@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";      
 import io from "socket.io-client";
 
 let socket;
@@ -24,7 +24,14 @@ export default function Home() {
       return;
     }
 
-    socket = io("http://192.168.1.3:8081");
+    const socketServerURL = window.location.hostname === "localhost"
+  ? "http://localhost:8081"
+  : `http://${window.location.hostname}:8081`;
+
+    socket = io(socketServerURL);
+
+
+   // socket = io("http://192.168.1.3:8081");
 
     socket.emit("user-online", userEmail);
 

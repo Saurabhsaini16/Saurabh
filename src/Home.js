@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import { useNavigate, useLocation } from "react-router-dom";      
+import { useNavigate, useLocation } from "react-router-dom";
 import io from "socket.io-client";
 
 let socket;
@@ -25,8 +25,8 @@ export default function Home() {
     }
 
     const socketServerURL = window.location.hostname === "localhost"
-  ? "http://localhost:8081"
-  : `http://${window.location.hostname}:8081`;
+      ? "http://localhost:8081"
+      : `http://${window.location.hostname}:8081`;
 
     socket = io(socketServerURL);
 
@@ -228,13 +228,20 @@ export default function Home() {
                       {msg.text}
                       {msg.file && (
                         <div style={{ marginTop: "5px" }}>
-                          <a
-                            href={msg.file.content}
-                            download={msg.file.name}
-                            style={{ color: "#007bff", textDecoration: "underline" }}
-                          >
-                            Download {msg.file.name}
-                          </a>
+                          {msg.file.type.startsWith("video/") ? (
+                            <video controls style={{ maxWidth: "100%", borderRadius: "10px", marginTop: "5px" }}>
+                              <source src={msg.file.content} type={msg.file.type} />
+                              Your browser does not support the video tag.
+                            </video>
+                          ) : (
+                            <a
+                              href={msg.file.content}
+                              download={msg.file.name}
+                              style={{ color: "#007bff", textDecoration: "underline" }}
+                            >
+                              Download {msg.file.name}
+                            </a>
+                          )}
                         </div>
                       )}
                     </div>
@@ -254,7 +261,11 @@ export default function Home() {
                   onChange={(e) => setMessage(e.target.value)}
                   style={{ flex: 1, padding: "10px", borderRadius: "5px", border: "1px solid #ccc" }}
                 />
-                <input type="file" onChange={(e) => setFile(e.target.files[0])} />
+                <input
+                  type="file"
+                  accept="image/*,video/*,.pdf,.doc,.docx,.zip,.rar"
+                  onChange={(e) => setFile(e.target.files[0])}
+                />
                 <button onClick={handleSend} style={{ padding: "10px 20px", cursor: "pointer" }}>Send</button>
               </div>
             </>

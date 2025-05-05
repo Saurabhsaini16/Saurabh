@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require("express");
 const mysql = require('mysql');
 const cors = require('cors');
@@ -18,11 +19,11 @@ const io = new Server(server, {
 
 // MySQL setup
 const db = mysql.createConnection({
-  host: "localhost",
-  port: 3307,
-  user: "root",
-  password: "",
-  database: "signup"
+  host: process.env.MYSQL_HOST,
+  port: process.env.MYSQL_PORT || 3307,
+  user: process.env.MYSQL_USER,
+  password: process.env.MYSQL_PASSWORD,
+  database: process.env.MYSQL_DATABASE
 });
 
 // Signup route

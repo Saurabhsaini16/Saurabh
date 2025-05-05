@@ -21,7 +21,6 @@ export default function Signup() {
       if(errors.name==="" && errors.email==="" && errors.password===""){
         const API_BASE = `http://${window.location.hostname}:8081`;
               axios.post(`${API_BASE}/signup`, values)
-       // axios.post('http://localhost:8081/signup', values)
         .then(res =>{navigate('/');})
         .catch(err => console.log(err));
       }

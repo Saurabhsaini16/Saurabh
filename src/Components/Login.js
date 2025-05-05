@@ -27,7 +27,7 @@ export default function Login() {
       const API_BASE = `http://${window.location.hostname}:8081`;
       axios.post(`${API_BASE}/login`, values)
       
-      //axios.post('http://192.168.1.3:8081/login', values)
+      
         .then(res => {
           console.log("Login response:", res.data);
           if (res.data.message === "Success") {

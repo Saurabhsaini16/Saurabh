@@ -119,7 +119,7 @@ export default function Home() {
   }, [messages]);
 
   return (
-    <div style={{ maxWidth: "900px", margin: "0 auto", padding: "30px", fontFamily: "Arial, sans-serif" }}>
+    <div style={{height: "100vh",width: "100%", maxWidth: "900px", margin: "0 auto", padding: "30px", fontFamily: "Arial, sans-serif" }}>
       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "20px" }}>
         <h2 style={{ margin: 0 }}>Welcome, {userName}</h2>
         <div style={{ display: "flex", gap: "10px" }}>

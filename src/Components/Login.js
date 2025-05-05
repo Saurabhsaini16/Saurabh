@@ -21,18 +21,13 @@ export default function Login() {
     const validationErrors = LoginValidation(values);
     setErrors(validationErrors);
 
-    // Check if validation passed
     if (validationErrors.email === "" && validationErrors.password === "") {
-
       const API_BASE = `http://${window.location.hostname}:8081`;
       axios.post(`${API_BASE}/login`, values)
-      
-      
         .then(res => {
           console.log("Login response:", res.data);
           if (res.data.message === "Success") {
-            // Passing email to Home page using navigate()
-            navigate('/home', { state: { email: res.data.email ,name: res.data.name} });
+            navigate('/home', { state: { email: res.data.email, name: res.data.name } });
           } else {
             alert("No Record Found");
           }
@@ -41,6 +36,10 @@ export default function Login() {
           console.error("Login error:", err);
         });
     }
+  };
+
+  const handleForgotPassword = () => {
+    alert("Password recovery not implemented.");
   };
 
   return (
@@ -61,19 +60,19 @@ export default function Login() {
           </div>
           <div><label>Password</label></div>
           <div>
-            <input
-              type="password"
-              placeholder="Password"
-              name="password"
-              onChange={handleInput}
-              value={values.password}
-            />
+            <input type="password" placeholder="Password" name="password" onChange={handleInput} value={values.password}/>
             {errors.password && <span className="text-danger"> {errors.password} </span>}
           </div>
-          <a href="#">Forget password?</a>
+          <div>
+            <button type="button" className="link-button" onClick={handleForgotPassword}>
+              Forgot password?
+            </button>
+          </div>
           <div className="form-toggle">
             <button type="submit" className={isLogin ? 'active' : ""} onClick={() => setIsLogin(true)}>Login</button>
-            <button><Link to="/signup" className={!isLogin ? 'active' : ""} onClick={() => setIsLogin(false)}>Signup</Link></button>
+            <Link to="/signup">
+              <button type="button" className={!isLogin ? 'active' : ""} onClick={() => setIsLogin(false)}>Signup</button>
+            </Link>
           </div>
         </form>
       </div>

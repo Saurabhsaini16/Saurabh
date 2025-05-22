@@ -95,3 +95,23 @@
 .link-button:hover {
   color: #0056b3;
 }
+.my-button {
+  background: #4CAF50;
+  color: #fff;
+  padding: 10px 16px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 16px;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+  transition: 0.2s ease;
+}
+
+.my-button:hover {
+  background: #45a049;
+}
+
+.my-button:active {
+  transform: scale(0.97);
+}
+

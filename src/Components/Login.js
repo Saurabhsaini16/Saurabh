@@ -64,9 +64,7 @@ export default function Login() {
             {errors.password && <span className="text-danger"> {errors.password} </span>}
           </div>
           <div>
-            <button type="button" className="link-button" onClick={handleForgotPassword}>
-              Forgot password?
-            </button>
+          <Link to="/forgot-password" className="link-button">Forgot password?</Link>
           </div>
           <div className="form-toggle">
             <button type="submit" className={isLogin ? 'active' : ""} onClick={() => setIsLogin(true)}>Login</button>

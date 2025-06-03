@@ -410,6 +410,12 @@ export default function Home() {
               placeholder="Type your message..."
               value={message}
               onChange={(e) => setMessage(e.target.value)}
+              onKeyDown={(e) => {
+                if (e.key === "Enter") {
+                  e.preventDefault();
+                  handleSend();
+                }
+              }}
               style={{
                 flex: 1,
                 minWidth: "120px",
